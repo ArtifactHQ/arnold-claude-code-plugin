@@ -1,0 +1,13 @@
+{
+  "hooks": [
+    {
+      "matcher": "SessionStart",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "which arnold > /dev/null 2>&1 && echo 'Arnold Pipeline is available.' || echo 'Arnold is not installed. Run: brew install arnold'"
+        }
+      ]
+    }
+  ]
+}

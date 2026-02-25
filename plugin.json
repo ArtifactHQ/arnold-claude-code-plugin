@@ -1,0 +1,6 @@
+{
+  "name": "arnold",
+  "description": "Design your product through conversation. Arnold handles spec generation, task planning, quality validation, and drift detection.",
+  "version": "0.1.0",
+  "min_arnold_version": "0.1.0"
+}

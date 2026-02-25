@@ -1,0 +1,7 @@
+{
+  "arnold": {
+    "command": "arnold",
+    "args": ["mcp"],
+    "description": "Arnold Pipeline — spec management, task planning, tier validation, and drift detection"
+  }
+}
