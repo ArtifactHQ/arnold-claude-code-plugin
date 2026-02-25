@@ -9,6 +9,7 @@ Arnold maintains a living specification for your project. This plugin gives Clau
 - [Claude Code](https://claude.ai/code) installed and configured
 - Arnold Pipeline installed:
   ```sh
+  brew tap ArtifactHQ/arnold
   brew install arnold
   ```
   Or via RubyGems:
