@@ -80,7 +80,8 @@ printf "\ncommands/\n"
 check_file_exists "commands/arnold-status.md"
 check_file_exists "commands/arnold-build.md"
 check_file_exists "commands/arnold-drift.md"
-for cmd in arnold-status.md arnold-build.md arnold-drift.md; do
+check_file_exists "commands/arnold-new.md"
+for cmd in arnold-status.md arnold-build.md arnold-drift.md arnold-new.md; do
   if head -1 "$PLUGIN_ROOT/commands/$cmd" | grep -q "^---"; then
     pass "commands/$cmd has YAML frontmatter"
   else
@@ -104,9 +105,31 @@ check_json_field ".claude/settings.json" ".permissions.allow[0]"
 printf "\nREADME.md\n"
 check_file_exists "README.md"
 
+# Agent definition: discovery guidance
+printf "\nagents/arnold.md discovery support\n"
+if grep -q "Discovery Mode" "$PLUGIN_ROOT/agents/arnold.md"; then
+  pass "agents/arnold.md has Discovery Mode section"
+else
+  fail "agents/arnold.md missing Discovery Mode section"
+fi
+if grep -q "create_product" "$PLUGIN_ROOT/agents/arnold.md"; then
+  pass "agents/arnold.md references create_product tool"
+else
+  fail "agents/arnold.md missing create_product tool reference"
+fi
+
+# plugin.json: min_arnold_version updated for discovery tools
+printf "\nplugin.json version check\n"
+MIN_VERSION=$(jq -r '.min_arnold_version' "$PLUGIN_ROOT/plugin.json" 2>/dev/null)
+if [ "$MIN_VERSION" != "0.1.0" ]; then
+  pass "plugin.json min_arnold_version updated ($MIN_VERSION)"
+else
+  fail "plugin.json min_arnold_version still at 0.1.0 — needs update for discovery tools"
+fi
+
 # Cross-reference: commands mentioned in README
 printf "\nCross-references\n"
-for cmd in arnold:status arnold:build arnold:drift; do
+for cmd in arnold:status arnold:build arnold:drift arnold:new; do
   if grep -q "$cmd" "$PLUGIN_ROOT/README.md"; then
     pass "README.md references $cmd"
   else

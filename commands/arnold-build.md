@@ -34,4 +34,5 @@ Begin executing the current project. This pulls the spec and tasks from Arnold a
 - Work through one tier at a time. Never skip ahead.
 - After each tier, give the user a brief summary: what was built, what passed validation, what's next.
 - If a task seems wrong or contradicts the spec, stop and ask rather than implementing something incorrect.
-- If this is the first run and no tasks exist yet, tell the user they need to design their product first (suggest /arnold:status or just describing what they want to build).
+- If this is the first run and no tasks exist yet, tell the user they need to design their product first (suggest /arnold:new or just describing what they want to build).
+- If the spec was just created and never explored or refined (single revision with `change_source: "creation"`, no subsequent changes), suggest the user review the spec first: "You haven't reviewed or refined the spec yet. Want to explore what Arnold generated before building? Or go ahead and build from the initial spec?" Let the user decide — do not block them if they want to proceed.

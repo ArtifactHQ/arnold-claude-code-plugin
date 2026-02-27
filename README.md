@@ -2,7 +2,7 @@
 
 A Claude Code plugin that connects your AI coding assistant to Arnold Pipeline. Design your product through conversation, build it tier-by-tier with quality gates, and detect drift between your spec and codebase.
 
-Arnold maintains a living specification for your project. This plugin gives Claude Code access to Arnold's tools so it can help you design, plan, build, and validate your product without leaving your editor.
+Arnold maintains a living specification for your project. This plugin gives Claude Code access to Arnold's tools so it can help you discover, design, plan, build, and validate your product without leaving your editor.
 
 ## Prerequisites
 
@@ -33,15 +33,36 @@ git clone https://github.com/ArtifactHQ/arnold-claude-code-plugin.git
 claude plugin add ./arnold-claude-code-plugin
 ```
 
+## Getting Started
+
+Start by describing what you want to build. Arnold generates an initial spec, then you explore and refine it through conversation before writing any code.
+
+1. **Describe your idea:** "I want to build a dog walking app"
+2. **Explore what Arnold created:** ask about personas, domains, features
+3. **Refine with changes:** "walkers should be able to set their own prices"
+4. **Think out loud:** "what if we added group walks?"
+5. **When ready:** "let's build this"
+
+You can use `/arnold:new` for an explicit starting point, or just describe your idea in chat.
+
 ## Commands
+
+### /arnold:new
+
+Start a new product. Describe your idea and Arnold generates an initial spec with personas, domains, and capabilities. Then explore and refine through conversation.
+
+```
+/arnold:new a dog walking app
+/arnold:new
+```
 
 ### /arnold:status
 
-Quick overview of your project state: what's defined in the spec, how tasks are progressing, and what's next.
+Quick overview of your project state. During discovery, shows the spec outline and suggests exploration. During execution, shows task progress and what's next.
 
 ### /arnold:build
 
-Start or continue building your project. Pulls the spec and tasks from Arnold, works through them tier-by-tier, and runs validation after each tier.
+Start or continue building your project. Pulls the spec and tasks from Arnold, works through them tier-by-tier, and runs validation after each tier. If the spec hasn't been explored yet, suggests reviewing it first.
 
 ### /arnold:drift
 
@@ -61,7 +82,16 @@ No data leaves your machine beyond what Claude Code already sends. Arnold runs l
 
 ## MCP Tools
 
-The plugin exposes Arnold's tools to Claude Code, organized into four tracks:
+The plugin exposes Arnold's tools to Claude Code, organized into five tracks:
+
+### Discovery Track
+| Tool | Description |
+|------|-------------|
+| `create_product` | Start a pipeline from a natural language product idea |
+| `explore_persona` | Drill into a persona's experience, goals, and workflows |
+| `explore_capability` | Drill into a specific capability — behavior, edge cases, constraints |
+| `what_if` | Explore a hypothetical scenario without committing to it |
+| `get_history` | Review how the spec has evolved over the conversation |
 
 ### Product Track
 | Tool | Description |
@@ -88,7 +118,7 @@ The plugin exposes Arnold's tools to Claude Code, organized into four tracks:
 | `report_issue` | Flag a problem during execution |
 | `validate_tier` | Run quality validation after completing a tier |
 
-### Drift Track
+### Maintenance Track
 | Tool | Description |
 |------|-------------|
 | `detect_drift` | Scan for spec-to-code divergence |
@@ -98,6 +128,7 @@ The plugin exposes Arnold's tools to Claude Code, organized into four tracks:
 
 | Plugin Version | Min Arnold Version |
 |---------------|-------------------|
+| 0.2.0 | 0.2.0 |
 | 0.1.0 | 0.1.0 |
 
 ## License

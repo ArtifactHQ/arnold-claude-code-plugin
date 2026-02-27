@@ -5,7 +5,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "which arnold > /dev/null 2>&1 && echo 'Arnold Pipeline is available.' || echo 'Arnold is not installed. Run: brew tap ArtifactHQ/arnold && brew install arnold'"
+          "command": "if ! which arnold > /dev/null 2>&1; then echo 'Arnold is not installed. Run: brew tap ArtifactHQ/arnold && brew install arnold'; elif [ -f ~/.arnold_pipeline/pipeline.sqlite3 ] && sqlite3 ~/.arnold_pipeline/pipeline.sqlite3 'SELECT COUNT(*) FROM tasks' 2>/dev/null | grep -qv '^0$'; then echo 'Arnold Pipeline is available. Product in progress with tasks — use /arnold:status to see where you left off.'; elif [ -f ~/.arnold_pipeline/pipeline.sqlite3 ]; then echo 'Arnold Pipeline is available. Product in discovery phase — want to continue exploring, or ready to build?'; else echo 'Arnold Pipeline is available. Describe your product idea or use /arnold:new to get started.'; fi"
         }
       ]
     }

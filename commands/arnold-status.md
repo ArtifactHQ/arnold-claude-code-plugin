@@ -11,9 +11,9 @@ Get a quick overview of the current project state by pulling data from Arnold.
 
 1. Call `describe_product` to get the current product description and spec summary.
 2. Call `get_tasks` to retrieve all tasks and their statuses.
-3. Present a clear summary organized into sections:
+3. Present a summary based on the project's current phase:
 
-### Output Format
+### If tasks exist (execution phase)
 
 **Product:** One-line description of what's being built.
 
@@ -25,5 +25,17 @@ Get a quick overview of the current project state by pulling data from Arnold.
 - Next actionable item
 
 **Issues:** Any open issues or blockers reported via `report_issue`.
+
+### If no tasks exist (discovery phase)
+
+The product has a spec but hasn't moved to execution yet. Present:
+
+**Product:** One-line description of what's being built.
+
+**Spec Status:** Number of personas, domains, and capabilities defined. Number of spec revisions.
+
+**Discovery:** Suggest next steps — the user can continue exploring personas and capabilities, refine the spec with changes, or start building. Do not say "nothing to build" — the product is in the discovery phase.
+
+### General
 
 Keep the output concise. The user wants a glance, not a deep dive. If they want details on a specific area, they will ask.
