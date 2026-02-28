@@ -1,6 +1,6 @@
 {
   "arnold": {
-    "command": "arnold",
-    "args": ["mcp"]
+    "command": "bash",
+    "args": ["-lc", "arnold mcp"]
   }
 }

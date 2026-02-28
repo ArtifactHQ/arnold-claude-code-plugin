@@ -71,7 +71,7 @@ printf "\n.mcp.json\n"
 check_file_exists ".mcp.json"
 check_valid_json ".mcp.json"
 check_json_field ".mcp.json" ".arnold.command"
-check_json_field ".mcp.json" ".arnold.args"
+check_json_field ".mcp.json" ".arnold.args[0]"
 
 # Agent definition
 printf "\nagents/arnold.md\n"
