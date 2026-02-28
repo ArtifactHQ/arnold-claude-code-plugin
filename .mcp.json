@@ -1,0 +1,6 @@
+{
+  "arnold": {
+    "command": "arnold",
+    "args": ["mcp"]
+  }
+}

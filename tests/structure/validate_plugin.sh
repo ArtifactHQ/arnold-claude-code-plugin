@@ -51,20 +51,27 @@ check_json_field() {
 printf "Plugin Structure Validation\n"
 printf "===========================\n\n"
 
-# plugin.json
-printf "plugin.json\n"
-check_file_exists "plugin.json"
-check_valid_json "plugin.json"
-check_json_field "plugin.json" ".name"
-check_json_field "plugin.json" ".description"
-check_json_field "plugin.json" ".version"
+# .claude-plugin/plugin.json
+printf ".claude-plugin/plugin.json\n"
+check_file_exists ".claude-plugin/plugin.json"
+check_valid_json ".claude-plugin/plugin.json"
+check_json_field ".claude-plugin/plugin.json" ".name"
+check_json_field ".claude-plugin/plugin.json" ".description"
+check_json_field ".claude-plugin/plugin.json" ".version"
+
+# .claude-plugin/marketplace.json
+printf "\n.claude-plugin/marketplace.json\n"
+check_file_exists ".claude-plugin/marketplace.json"
+check_valid_json ".claude-plugin/marketplace.json"
+check_json_field ".claude-plugin/marketplace.json" ".plugins[0].name"
+check_json_field ".claude-plugin/marketplace.json" ".plugins[0].source"
 
 # MCP server config
-printf "\nmcp-servers/arnold.json\n"
-check_file_exists "mcp-servers/arnold.json"
-check_valid_json "mcp-servers/arnold.json"
-check_json_field "mcp-servers/arnold.json" ".arnold.command"
-check_json_field "mcp-servers/arnold.json" ".arnold.args"
+printf "\n.mcp.json\n"
+check_file_exists ".mcp.json"
+check_valid_json ".mcp.json"
+check_json_field ".mcp.json" ".arnold.command"
+check_json_field ".mcp.json" ".arnold.args"
 
 # Agent definition
 printf "\nagents/arnold.md\n"
@@ -96,10 +103,10 @@ check_valid_json "hooks/hooks.json"
 check_json_field "hooks/hooks.json" ".hooks[0].matcher"
 
 # Settings
-printf "\n.claude/settings.json\n"
-check_file_exists ".claude/settings.json"
-check_valid_json ".claude/settings.json"
-check_json_field ".claude/settings.json" ".permissions.allow[0]"
+printf "\nsettings.json\n"
+check_file_exists "settings.json"
+check_valid_json "settings.json"
+check_json_field "settings.json" ".permissions.allow[0]"
 
 # README
 printf "\nREADME.md\n"
@@ -118,13 +125,13 @@ else
   fail "agents/arnold.md missing create_product tool reference"
 fi
 
-# plugin.json: min_arnold_version updated for discovery tools
-printf "\nplugin.json version check\n"
-MIN_VERSION=$(jq -r '.min_arnold_version' "$PLUGIN_ROOT/plugin.json" 2>/dev/null)
-if [ "$MIN_VERSION" != "0.1.0" ]; then
-  pass "plugin.json min_arnold_version updated ($MIN_VERSION)"
+# plugin version check
+printf "\nplugin version check\n"
+PLUGIN_VERSION=$(jq -r '.version' "$PLUGIN_ROOT/.claude-plugin/plugin.json" 2>/dev/null)
+if [ "$PLUGIN_VERSION" != "0.1.0" ]; then
+  pass "plugin.json version updated ($PLUGIN_VERSION)"
 else
-  fail "plugin.json min_arnold_version still at 0.1.0 — needs update for discovery tools"
+  fail "plugin.json version still at 0.1.0 — needs update for discovery tools"
 fi
 
 # Cross-reference: commands mentioned in README

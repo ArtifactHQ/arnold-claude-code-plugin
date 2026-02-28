@@ -1,0 +1,30 @@
+{
+  "name": "arnold-plugins",
+  "owner": {
+    "name": "ArtifactHQ",
+    "url": "https://github.com/ArtifactHQ"
+  },
+  "metadata": {
+    "description": "Arnold Pipeline plugins for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "arnold",
+      "source": "./",
+      "description": "Design your product through conversation. Arnold handles spec generation, task planning, quality validation, and drift detection.",
+      "version": "0.2.0",
+      "author": {
+        "name": "ArtifactHQ"
+      },
+      "homepage": "https://github.com/ArtifactHQ/arnold-claude-code-plugin",
+      "license": "MIT",
+      "keywords": [
+        "arnold",
+        "product-development",
+        "spec-driven",
+        "pipeline",
+        "mcp"
+      ]
+    }
+  ]
+}

@@ -20,17 +20,11 @@ Arnold maintains a living specification for your project. This plugin gives Clau
 
 ## Installation
 
-Using the Claude Code CLI:
+Add the marketplace, then install the plugin:
 
 ```sh
-claude plugin add arnold
-```
-
-Or manually clone and link:
-
-```sh
-git clone https://github.com/ArtifactHQ/arnold-claude-code-plugin.git
-claude plugin add ./arnold-claude-code-plugin
+claude plugin marketplace add ArtifactHQ/arnold-claude-code-plugin
+claude plugin install arnold
 ```
 
 ## Getting Started
